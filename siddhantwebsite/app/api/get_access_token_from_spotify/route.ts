@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import axios from "axios";
 require("dotenv").config({ path: "../../../.env" });
 
-let accessToken = "";
+let accessToken =
+	"BQB8TrIec-zvrbHZx-IXIblic_Iui0A-kdx-mtNC_yU2sGm3zeRJ7pbT1CvQqH1_Ta0sOO-Ad2DkcF_PWIeptFhEHfyH69jGKBPo46-3_dJSOyeraUQUARmlYtCv9i4TJCDNGkO064z6RZZ0JI9UR1hic7vwjdOhP2wLHUSpzEmPqQ11KyR1O-lYlkC2DjhFbR8";
 
 // Function to refresh the access token
 async function refreshAccessToken() {
@@ -34,26 +35,9 @@ async function refreshAccessToken() {
 	}
 }
 
-// Refresh the access token immediately and then every hour
-refreshAccessToken();
-setInterval(refreshAccessToken, 1000 * 60 * 60); // 1 hour in milliseconds
+// setInterval(refreshAccessToken, 1000 * 60 * 60); // 1 hour in milliseconds
 
 export async function GET() {
-	const res = await fetch(
-		"https://api.spotify.com/v1/me/player/currently-playing",
-		{
-			headers: {
-				Authorization: `Bearer ${accessToken}`,
-			},
-		}
-	);
-
-	if (res.ok) {
-		const data = await res.json();
-		console.log("Data:", data);
-		return NextResponse.json({ status: "OK", data });
-	} else {
-		console.log("Error:", res.status);
-		return NextResponse.json({ status: "NOTOK" });
-	}
+	refreshAccessToken();
+	return NextResponse.json({ accessToken });
 }

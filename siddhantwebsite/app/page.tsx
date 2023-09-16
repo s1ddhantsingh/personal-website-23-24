@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import SpotifyView from './components/SpotifyView'
 
 /*
 <Image
@@ -25,6 +26,7 @@ export default function Home() {
     <main>
       <div>siddhant singh</div>
       <div>hey there! nice to meet you. i'm an ambitious 17 year old looking to take asymetric risks.</div>
+      <SpotifyView />
     </main>
   )
 }
