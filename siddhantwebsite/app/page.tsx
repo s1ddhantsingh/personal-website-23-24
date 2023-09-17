@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import SpotifyView from './components/SpotifyView'
+import AboutMe from './components/AboutMe'
 
 /*
 <Image
@@ -23,10 +24,9 @@ planning:
 */
 export default function Home() {
   return (
-    <main>
-      <div>siddhant singh</div>
-      <div>hey there! nice to meet you. i'm an ambitious 17 year old looking to take asymetric risks.</div>
+    <main className='justify-center flex flex-shrink gap-4 m-5'>
       <SpotifyView />
+      <AboutMe />
     </main>
   )
 }

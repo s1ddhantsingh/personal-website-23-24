@@ -19,20 +19,25 @@ const SpotifyView = () => {
     }
   };
   getCurrentlyStreamingFromSpotify();
-  const intervalId = setInterval(getCurrentlyStreamingFromSpotify, 1000 * 15); // reloads my currently playing song every minute
+  const intervalId = setInterval(getCurrentlyStreamingFromSpotify, 1000 * 60); // reloads my currently playing song every minute
     return () => clearInterval(intervalId)
   }, []) 
 
   const [streaming, setStreaming] = useState({})
-  const imageUrl = streaming && (streaming as any)["out"] && (streaming as any)["out"]["image-url"] && (streaming as any)["out"]["image-url"]["url"] ? (streaming as any)["out"]["image-url"]["url"] : "";
+  const imageUrl = streaming && (streaming as any)["out"] && (streaming as any)["out"]["image-url"] && (streaming as any)["out"]["image-url"]["url"] ? (streaming as any)["out"]["image-url"]["url"] : ""; 
+  const songUrl = streaming && (streaming as any)["out"] && (streaming as any)["out"]["song-url"] ? (streaming as any)["out"]["song-url"] : ""; 
 
   return (
-    <div 
-      className="w-48 h-48 bg-cover bg-center rounded shadow-lg" 
-      style={{ backgroundImage: `url(${imageUrl})` }}
-    >
-      {/* Other card content */}
-    </div>
+    streaming && (streaming as any)["out"] &&
+    <a href={`${(streaming as any)["out"]["song-url"]}`}>
+      <div 
+            className="w-48 h-48 bg-center rounded bg-cover shadow-lg outline outline-black hover:cursor-pointer hover:scale-105 hover:ease-linear hover: duration-100" 
+            style={{ backgroundImage: `url(${imageUrl})` }}
+          >
+            {/* Other card content */}
+          </div>
+    </a>
+    
   );
 }
 
